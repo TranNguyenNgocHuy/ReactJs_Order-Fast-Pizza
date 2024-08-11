@@ -1,30 +1,42 @@
-import { useState } from 'react'
-import InputField from './components/InputField'
-import TodoList from './components/TodoList'
-import { Todo } from './model'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
-const App: React.FC = () => {
-  const [todo, setTodo] = useState<string>('')
-  const [todos, setTodos] = useState<Todo[]>([])
+import Home from './ui/Home'
+import Menu from './features/menu/Menu'
+import Cart from './features/cart/Cart'
+import Order from './features/order/Order'
+import CreateOrder from './features/order/CreateOrder'
+import AppLayout from './ui/AppLayout'
 
-  function handleAdd(e: React.FormEvent): void {
-    e.preventDefault()
-
-    if (!todo) return
-
-    const newTodo: Todo = { id: Date.now(), todo, isDone: false }
-
-    setTodos([...todos, newTodo])
-    setTodo('')
+const router = createBrowserRouter([
+  {
+    element: <AppLayout />,
+    children: [
+      {
+        path: '/',
+        element: <Home />
+      },
+      {
+        path: '/menu',
+        element: <Menu />
+      },
+      {
+        path: '/cart',
+        element: <Cart />
+      },
+      {
+        path: '/order/new',
+        element: <CreateOrder />
+      },
+      {
+        path: '/order/:orderId',
+        element: <Order />
+      }
+    ]
   }
+])
 
-  return (
-    <div className='App'>
-      <span className='heading'>Taskify</span>
-      <InputField todo={todo} setTodo={setTodo} handleAdd={handleAdd} />
-      <TodoList todos={todos} setTodos={setTodos} />
-    </div>
-  )
+function App() {
+  return <RouterProvider router={router} />
 }
 
 export default App
