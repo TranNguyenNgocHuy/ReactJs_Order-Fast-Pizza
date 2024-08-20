@@ -37,7 +37,8 @@ const router = createBrowserRouter([
         loader: orderLoader,
         errorElement: <Error />
       }
-    ]
+    ],
+    errorElement: <Error />
   }
 ])
 
