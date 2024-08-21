@@ -9,13 +9,13 @@ export interface PizzaObj {
 
 export interface NewOrder {
   address: string
-  cart: Cart[]
+  cart: Item[]
   customer: string
   phone: string
   priority: boolean
 }
 
-interface Cart {
+export interface Item {
   pizzaId: number
   name: string
   quantity: number
