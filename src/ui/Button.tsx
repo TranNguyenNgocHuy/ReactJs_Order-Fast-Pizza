@@ -5,7 +5,7 @@ interface Props {
   to?: string
   disabled?: boolean
   type: 'primary' | 'small' | 'secondary' | 'round'
-  onClick?: () => void
+  onClick?: (e: React.MouseEvent<HTMLButtonElement> | React.FormEvent<HTMLFormElement>) => void
 }
 
 function Button({ children, disabled, to, type, onClick }: Props) {
